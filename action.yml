@@ -31,12 +31,13 @@ runs:
       fi
       pip install --quiet -Iv c7n"${VERSION_ARG}"
       dir=$(pwd)
-      cat << EOF > /usr/local/bin/custodian
+      mkdir -p ${dir}/bin
+      cat << EOF > ${dir}/bin/custodian
       #!/bin/bash
       source ${dir}/custodian/bin/activate
       custodian "\$@"
       EOF
-      chmod +x /usr/local/bin/custodian
+      chmod +x ${dir}/bin/custodian
 
   - name: "Install azure extension"
     if: ${{ inputs.include-azure }}
