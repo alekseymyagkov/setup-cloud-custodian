@@ -35,6 +35,7 @@ runs:
       cat << EOF > ${dir}/bin/custodian
       #!/bin/bash
       source ${dir}/custodian/bin/activate
+      export PATH=${dir}/bin/:${PATH}
       custodian "\$@"
       EOF
       chmod +x ${dir}/bin/custodian   
