@@ -7,6 +7,16 @@ branding:
 inputs:
   custodian-version:
     description: "Install a particular version of cloud custodian"
+  include-azure:
+    description: "Installs the c7n_azure extension if set to true"
+    default: false
+  include-gcp:
+    description: "Installs the c7n_gcp extension if set to true"
+    default: false
+  include-c7n-org: 
+    description: "Installs the c7n-org extension if set to true"
+    default: false
+
 runs:
   using: "composite"
   steps:
@@ -21,12 +31,10 @@ runs:
       fi
       pip install --quiet -Iv c7n"${VERSION_ARG}"
       dir=$(pwd)
-      echo ${HOME}
       mkdir -p ${HOME}/bin
       cat << EOF > ${HOME}/bin/custodian
       #!/bin/bash
       source ${dir}/custodian/bin/activate
-      export PATH=${HOME}/bin/:${PATH}
       custodian "\$@"
       EOF
-      chmod +x ${HOME}/bin/custodian   
+      chmod +x ${HOME}/bin/custodian
