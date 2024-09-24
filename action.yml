@@ -38,3 +38,4 @@ runs:
       custodian "\$@"
       EOF
       chmod +x ${HOME}/bin/custodian
+      export PATH=${HOME}/bin:${PATH}
